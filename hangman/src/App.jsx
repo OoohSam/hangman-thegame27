@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { languages } from "./language.js"
-import { clsx } from 'clsx'
+import  clsx  from 'clsx'
 
 /**
  * Goal: Allow the user to start guessing the letters
@@ -19,11 +19,32 @@ export default function AssemblyEndgame() {
 
     const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
+        function declare(letter){
+            
+
+                const isGuessed = guessedLetters.includes(letter)
+                const isTrue = isGuessed && currentWord.includes(letter)
+                const isFalse = isGuessed && !isTrue
+
+       return(
+
+           clsx("button", {
+                    "bg-green-600 text-white": isTrue,
+                    "bg-red-600 text-white": isFalse,
+                    "bg-gray-200": !isGuessed
+    
+            })
+
+       ) 
+        }
+
     function addGuessedLetter(letter) {
+        console.log("love rescued me" ,letter)
+
         setGuessedLetters(prevLetters =>
             prevLetters.includes(letter) ?
                 prevLetters :
-                [...prevLetters, letter] && setCurrentWord(prev=> [...prev,letter])
+                [...prevLetters, letter] 
         )
     }
     
@@ -53,15 +74,18 @@ export default function AssemblyEndgame() {
     
     //.................THIS CHANGES THE KEYBOARD ELEMENTS.......................
 
+
+
     const keyboardElements = alphabet.split("").map(letter => (
         <button
-            className="iwillname"
+            className={ declare(letter) }
             key={letter}
             onClick={() => addGuessedLetter(letter)}
         >
             {letter.toUpperCase()}
         </button>
     ))
+
 
     return (
         <main>
