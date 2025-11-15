@@ -92,16 +92,23 @@ section.keyboard {
 section.keyboard > button {
     height: 35px;
     width: 35px;
-    background-color: rgb(229 231 235)
+    background-color: rgb(229 231 235);
     border: 1px solid #D7D7D7;
     border-radius: 3px;
     cursor: pointer;
 }
 
-button success{
-
+section.keyboard >button.bg-green-600{
+    background-color: #16a34a;
 }
 
+section.keyboard >button.bg-red-600{
+    background-color: #dc2626;
+}
+
+section.keyboard >button.bg-gray-200{
+    background-color: #e5e7eb;
+}
 
 
 

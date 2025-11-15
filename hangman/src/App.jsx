@@ -11,11 +11,15 @@ import  clsx  from 'clsx'
  * Bonus: use the `clsx` package to easily add conditional 
  * classNames to the keys of the keyboard. Check the docs 
  * to learn how to use it 📖
- */
+*/
 
 export default function AssemblyEndgame() {
-    const [currentWord, setCurrentWord] = useState("python")
+
+ const randy =  Math.floor(Math.random() * languages.length )
+
+    const [currentWord, setCurrentWord] = useState( languages[randy].name )
     const [guessedLetters, setGuessedLetters] = useState([])
+    let tuMbili 
 
     const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
@@ -45,8 +49,28 @@ export default function AssemblyEndgame() {
             prevLetters.includes(letter) ?
                 prevLetters :
                 [...prevLetters, letter] 
+
         )
+
+      
+
     }
+
+
+    function newGame(){
+      
+
+       setCurrentWord(languages[randy].name)
+    }
+
+    //I want the state to hold the value to be guessed and that the place holder to be empty check boxes that display how many
+    //words that are to be displayed
+
+ //2. Now i want to make it that when a letter is guessed and it is in
+ // the current word to be displayed
+
+   //i have gotten the letter to be displayed.Now i want to display it
+
     
 //..................THIS TAKES LANGUAGES FROM LANGUAGES JS................................
 
@@ -68,10 +92,17 @@ export default function AssemblyEndgame() {
 
 //...................THIS ALTERS THE STATE AND CHANGES...............................
 
-    const letterElements = currentWord.split("").map((letter, index) => (
-        <span key={index}>{letter.toUpperCase()}</span>
-    ))
+    // const letterElements = currentWord.split("").map((letter, index) => (
+    //     <span key={index}>{letter.toUpperCase()}</span>
+    // ))
     
+
+    const letterElements = currentWord.split("").map((letter,index)=>{
+         const isTrue = guessedLetters.includes(letter) && currentWord.includes(letter)
+        return(
+            <span> { isTrue? letter.toUpperCase() :  ""  } </span>
+        )
+    })
     //.................THIS CHANGES THE KEYBOARD ELEMENTS.......................
 
 
@@ -112,7 +143,10 @@ export default function AssemblyEndgame() {
                 {keyboardElements}
             </section>
 
-            <button className="new-game">New Game</button>
+            <button 
+            className="new-game"
+            onClick={ ()=>{newGame()}  }
+            >New Game</button>
         </main>
     )
 }
